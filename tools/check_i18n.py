@@ -9,7 +9,8 @@ body = re.sub(r'<(script|style)[^>]*>[\s\S]*?</\1>', '', tpl)
 for m in re.finditer(r'>([^<>]*[А-Яа-яЁё][^<>]*)<', body): keys.add(' '.join(m.group(1).split()))
 for m in re.finditer(r'(?:title|aria-label|placeholder)="([^"]*[А-Яа-яЁё][^"]*)"', body): keys.add(m.group(1))
 d = json.load(open(os.path.join(R, 'src', 'i18n.json'), encoding='utf-8'))
-IGNORE = {'Атака Тогда Гора Ягоды', 'ТАРАКАН ГОРА ПАРК ГАЛА'}  # Cyrillic kerning test strings, intentionally untranslated
+IGNORE = {'Атака Тогда Гора Ягоды', 'ТАРАКАН ГОРА ПАРК ГАЛА',  # Cyrillic kerning test strings, intentionally untranslated
+          'Kernage не может запуститься в этом просмотрщике. Откройте', 'в браузере: Chrome, Safari, Firefox или Edge.'}  # boot notice: shown before scripts run, so it is bilingual
 miss = sorted(k for k in keys if k.strip() and k not in d and k not in IGNORE)
 print(len(keys), 'strings,', len(miss), 'missing'); [print('  ', k) for k in miss]
 sys.exit(1 if miss else 0)

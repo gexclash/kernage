@@ -1,9 +1,9 @@
 # Kernage — a font editor in your browser
 
-[![CI](https://github.com/gexhaw/kernage/actions/workflows/ci.yml/badge.svg)](https://github.com/gexhaw/kernage/actions/workflows/ci.yml)
+[![CI](https://github.com/gexclash/kernage/actions/workflows/ci.yml/badge.svg)](https://github.com/gexclash/kernage/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**[Open Kernage →](https://gexhaw.github.io/kernage/)** · [Download `kernage.html`](https://github.com/gexhaw/kernage/releases/latest)
+**[Open Kernage →](https://gexclash.github.io/kernage/)** · [Download `kernage.html`](https://github.com/gexclash/kernage/releases/latest)
 
 ![Kernage](docs/media/preview.webp)
 
@@ -19,7 +19,7 @@
 
 ## Quick start
 
-1. Download `kernage.html` from [Releases](https://github.com/gexhaw/kernage/releases/latest), or open the [web version](https://gexhaw.github.io/kernage/).
+1. Download `kernage.html` from [Releases](https://github.com/gexclash/kernage/releases/latest), or open the [web version](https://gexclash.github.io/kernage/).
 2. Open it in a browser (Chrome, Edge, Firefox or Safari) on a computer or phone.
 3. Tap any letter in the grid and start drawing.
 4. Press the arrow button in the header to download your font.
@@ -30,7 +30,7 @@ There is nothing to build or serve. All libraries and interface fonts are embedd
 
 ### Install as an app (PWA)
 
-The [web version](https://gexhaw.github.io/kernage/) can be installed as an app. You can also host `kernage-pwa.zip` from Releases on any HTTPS static host. Visitors can then press **Install** in the header, or use "Add to Home Screen", and Kernage works offline as a standalone app.
+The [web version](https://gexclash.github.io/kernage/) can be installed as an app. You can also host `kernage-pwa.zip` from Releases on any HTTPS static host. Visitors can then press **Install** in the header, or use "Add to Home Screen", and Kernage works offline as a standalone app.
 
 ---
 
@@ -253,7 +253,7 @@ The interface is written in Russian in the source. Every string goes through `T(
 
 ## Author
 
-Made by **gexhaw**: [GitHub](https://github.com/gexhaw) · [Instagram](https://www.instagram.com/gexhaw/)
+Made by **gexclash**: [GitHub](https://github.com/gexclash) · [Instagram](https://www.instagram.com/gexclash/)
 
 ## Licence
 

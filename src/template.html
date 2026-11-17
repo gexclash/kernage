@@ -385,7 +385,7 @@ input[type=search]{background:var(--panel2);border:1px solid var(--line);border-
 .anrow b{font:500 12px var(--f-mono)}
 #caltText{width:100%;min-height:84px;font:13px var(--f-mono);background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:8px;resize:vertical;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-#bootwarn{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:9999;background:#B3261E;color:#fff;padding:12px 14px;border-radius:10px;font:500 14px/1.4 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.3)}#bootwarn span{opacity:.85;font-size:12px}#booterr{margin-top:6px;font:12px/1.35 ui-monospace,monospace;white-space:pre-wrap;word-break:break-word}#booterr:empty{display:none}
+#bootwarn{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:9999;background:#1D2333;color:#F3F5FA;border-left:4px solid #6C7BFF;padding:14px 16px;border-radius:12px;font:400 15px/1.45 system-ui,sans-serif;box-shadow:0 8px 28px rgba(0,0,0,.28);max-width:640px;margin:0 auto;opacity:0;animation:bwIn .3s ease 3s forwards}#bootwarn b{font-weight:600}#bootwarn span{display:block;margin-top:6px;opacity:.8;font-size:13px}#booterr{margin-top:6px;font:12px/1.35 ui-monospace,monospace;white-space:pre-wrap;word-break:break-word;opacity:.7}#booterr:empty{display:none}@keyframes bwIn{to{opacity:1}}
 
 /* v4: larger UI */
 body{font-size:15px}
@@ -436,10 +436,20 @@ body{font-size:15px}
 }
 @media (max-width:980px){ .tfoot{flex-wrap:wrap} .tdots{flex-basis:100%;justify-content:center;margin-bottom:4px} .tfoot .btn{flex:1} }
 @media (pointer:coarse){ .btn.sm{min-height:36px} .bar .btn,.bar select{min-height:34px} .krow .x,.krow button{min-width:32px;min-height:32px} }
+.mbox.welcome{max-width:720px;gap:16px}
+.wtop{text-align:center;display:grid;gap:6px;padding-top:6px} .wlogo{font:700 34px/1 var(--f-display);letter-spacing:-.02em}
+.wtop h2{font-size:20px;margin:0} .wtop .hint{margin:0}
+.wopts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wopt{display:grid;align-content:start;justify-items:start;gap:6px;text-align:left;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--ink);cursor:pointer;font:inherit;transition:border-color .15s,transform .15s}
+.wopt:hover,.wopt:focus-visible{border-color:var(--accent);transform:translateY(-1px)} .wopt .ico{width:26px;height:26px;color:var(--accent)}
+.wopt b{font-size:16px} .wopt span{font-size:13.5px;color:var(--mute);line-height:1.45}
+.wopt.pri{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.wfoot{display:flex;justify-content:center}
+@media (max-width:720px){ .wopts{grid-template-columns:1fr} .wopt{grid-template-columns:auto 1fr;column-gap:12px;align-items:start;padding:14px} .wopt .ico{grid-row:span 2} .wlogo{font-size:28px} }
 </style>
 
 <div class="app">
-  <div id="bootwarn" role="alert">Kernage did not start. The file seems to be open in a viewer that doesn't run scripts (the Claude app, Telegram, Files). Open it in a browser: Chrome, Safari, Firefox.<br><span lang="ru">Kernage не запустился. Откройте файл в браузере: Chrome, Safari, Firefox.</span><div id="booterr"></div></div>
+  <div id="bootwarn" role="alert"><b>Kernage can't start here.</b> This viewer doesn't run web apps. Open <i>kernage.html</i> in a browser: Chrome, Safari, Firefox or Edge.<br><span lang="ru">Kernage не может запуститься в этом просмотрщике. Откройте <i>kernage.html</i> в браузере: Chrome, Safari, Firefox или Edge.</span><div id="booterr"></div></div>
   <div class="banner" id="libwarn" hidden>Библиотека шрифтов не загрузилась: рисовать можно, а сборка и экспорт шрифта недоступны. Обновите страницу.</div>
   <header class="bar">
     <div class="logo">Kernage <small>type studio</small></div>
@@ -880,7 +890,7 @@ body{font-size:15px}
           <p class="hint" style="margin:0">Проекты сохраняются в этом браузере автоматически. Чтобы перенести шрифт на другое устройство, скачайте .json.</p>
         </div>
       </div>
-      <div class="credits" id="credFont"><span class="cby">Kernage · <span>сделал</span> <a href="https://github.com/gexhaw" target="_blank" rel="noopener">gexhaw</a></span><a class="btn sm" href="https://github.com/gexhaw/kernage" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true" style="fill:currentColor;stroke:none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a><a class="btn sm" href="https://www.instagram.com/gexhaw/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.2"/><circle cx="14.2" cy="5.8" r=".6" style="fill:currentColor"/></svg><span>Instagram</span></a></div>
+      <div class="credits" id="credFont"><span class="cby">Kernage · <span>сделал</span> <a href="https://github.com/gexclash" target="_blank" rel="noopener">gexclash</a></span><a class="btn sm" href="https://github.com/gexclash/kernage" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true" style="fill:currentColor;stroke:none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a><a class="btn sm" href="https://www.instagram.com/gexclash/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.2"/><circle cx="14.2" cy="5.8" r=".6" style="fill:currentColor"/></svg><span>Instagram</span></a></div>
     </section>
   </main>
 </div>
@@ -916,6 +926,15 @@ body{font-size:15px}
     </div>
     <div class="pview"><canvas id="poCv"></canvas></div>
   </div>
+</div></div>
+<div class="modal" id="mWelcome" hidden><div class="mbox welcome" role="dialog" aria-modal="true" aria-labelledby="mWelcomeT">
+  <div class="wtop"><div class="wlogo">Kernage</div><h2 id="mWelcomeT">Как начнём?</h2><p class="hint">Шрифт хранится только на этом устройстве. Интернет не нужен.</p></div>
+  <div class="wopts">
+    <button class="wopt pri" id="wImport"><svg class="ico" viewBox="0 0 20 20"><path d="M10 3v10M6 9l4 4 4-4M4 16h12"/></svg><b>Открыть свой шрифт</b><span>.otf, .ttf, .woff, .woff2, .glyphs или UFO. Глифы, кернинг, альтернативы и лигатуры перенесутся.</span></button>
+    <button class="wopt" id="wSample"><svg class="ico" viewBox="0 0 20 20"><path d="M4 16L9 4h2l5 12M6.5 11h7"/></svg><b>Начать с бесплатного Orbita</b><span>Готовый шрифт на 255 глифов: латиница, кириллица, цифры, знаки. Меняйте и используйте как хотите.</span></button>
+    <button class="wopt" id="wBlank"><svg class="ico" viewBox="0 0 20 20"><rect x="4" y="3" width="12" height="14" rx="2"/><path d="M10 7v6M7 10h6"/></svg><b>Пустой шрифт</b><span>Те же буквы, но без рисунков. Всё рисуете с нуля.</span></button>
+  </div>
+  <div class="wfoot"><button class="btn ghost" id="wTour">Что умеет Kernage — в картинках</button></div>
 </div></div>
 <div class="modal" id="mTour" hidden><div class="mbox wide tour" role="dialog" aria-modal="true" aria-labelledby="mTourT">
   <div class="mhead"><h2 id="mTourT">Что умеет Kernage</h2><button class="btn sm ghost" data-close>Закрыть</button></div>
@@ -957,7 +976,7 @@ body{font-size:15px}
       <dt>?</dt><dd>эта справка</dd>
     </dl></section>
   </div>
-  <div class="credits" id="credHelp"><span class="cby">Kernage · <span>сделал</span> <a href="https://github.com/gexhaw" target="_blank" rel="noopener">gexhaw</a></span><a class="btn sm" href="https://github.com/gexhaw/kernage" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true" style="fill:currentColor;stroke:none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a><a class="btn sm" href="https://www.instagram.com/gexhaw/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.2"/><circle cx="14.2" cy="5.8" r=".6" style="fill:currentColor"/></svg><span>Instagram</span></a></div>
+  <div class="credits" id="credHelp"><span class="cby">Kernage · <span>сделал</span> <a href="https://github.com/gexclash" target="_blank" rel="noopener">gexclash</a></span><a class="btn sm" href="https://github.com/gexclash/kernage" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true" style="fill:currentColor;stroke:none"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a><a class="btn sm" href="https://www.instagram.com/gexclash/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.2"/><circle cx="14.2" cy="5.8" r=".6" style="fill:currentColor"/></svg><span>Instagram</span></a></div>
 </div></div>
 
 <script>window.__bootErr=[];window.addEventListener("error",function(e){var m=(e.message||"error")+(e.lineno?" @"+e.lineno+":"+e.colno:"");window.__bootErr.push(m);var b=document.getElementById("booterr");if(b&&document.getElementById("bootwarn"))b.textContent=window.__bootErr.slice(0,3).join("\n");else if(window.__showErr)window.__showErr(m)});window.addEventListener("unhandledrejection",function(e){var m=String(e.reason&&e.reason.message||e.reason);if(window.__showErr)window.__showErr(m)});</script>

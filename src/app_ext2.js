@@ -167,3 +167,19 @@ $('#tourTry').addEventListener('click', () => {
   f.addEventListener('pointercancel', () => { sx = null; }); }
 $('#onbTour').addEventListener('click', () => openTour(0));
 $('#helpTour').addEventListener('click', () => { closeModal($('#mHelp')); openTour(0); });
+
+/* ======================= v5: WELCOME ======================= */
+function closeWelcome() { closeModal($('#mWelcome')); }
+$('#wImport').addEventListener('click', () => {
+  replaceFirst = projId; closeWelcome(); setTab('font'); let picked = false; const inp = $('#fOpen');
+  inp.addEventListener('change', () => { picked = true; }, { once: true });
+  // file dialog cancelled: forget the replacement so a later "New font" never overwrites the sample
+  window.addEventListener('focus', () => setTimeout(() => { if (!picked) replaceFirst = null; }, 1500), { once: true });
+  inp.click();
+});
+$('#wSample').addEventListener('click', () => { replaceFirst = null; closeWelcome(); setTab('glyphs'); toast(T('Создан шрифт из образца Orbita')); });
+$('#wBlank').addEventListener('click', () => { replaceFirst = projId; closeWelcome(); newProject((() => { const f = L.emptyFont(); f.info.familyName = T('Новый шрифт'); return f; })(), T('Создан пустой шрифт')); setTab('glyphs'); });
+$('#wTour').addEventListener('click', () => { closeWelcome(); openTour(0); });
+$('#mWelcome').addEventListener('click', e => { if (e.target.id === 'mWelcome') closeWelcome(); });
+// first visit only; automated test browsers skip it unless they ask for it
+if (lsGet('litera.welcome') !== '1' && !location.hash.startsWith('#p=') && (!navigator.webdriver || lsGet('litera.welcome.test') === '1')) setTimeout(() => { lsSet('litera.welcome', '1'); openModal('mWelcome'); }, 0);

@@ -24,7 +24,7 @@ def build():
     open(pre, 'w', encoding='utf-8').write(t)
     subprocess.run(['node', p('tools', 'wrapjs.js'), pre, post], check=True)   # short lines + syntax check of every <script>
     t = open(post, encoding='utf-8').read(); os.remove(pre); os.remove(post)
-    open(p('dist', 'kernage.html'), 'w', encoding='utf-8').write(t)
+    open(p('dist', 'kernage.html'), 'w', encoding='utf-8').write('<!DOCTYPE html>\n<html lang="en">\n' + t)
     sk = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}</style></head><body>'
     open(p('dist', 'kernage_test.html'), 'w', encoding='utf-8').write(sk + t + '</body></html>')
     # PWA kit

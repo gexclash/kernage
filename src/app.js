@@ -1094,7 +1094,8 @@ function renderProjects() {
     box.appendChild(row);
   }
 }
-function newProject(f, msg) { save(); projId = newPid(); setFont(f); save(); renderProjects(); if (msg) toast(msg); }
+let replaceFirst = null; // welcome screen: the first choice replaces the untouched sample instead of adding a second project
+function newProject(f, msg) { if (replaceFirst && replaceFirst === projId) { replaceFirst = null; setFont(f); save(); renderProjects(); if (msg) toast(msg); return; } replaceFirst = null; save(); projId = newPid(); setFont(f); save(); renderProjects(); if (msg) toast(msg); }
 function openProject(id) {
   save(); let o = null; try { o = JSON.parse(localStorage.getItem('litera.p.' + id) || 'null'); } catch (e) { }
   if (!o || !o.glyphs) { toast(T('Проект не найден в хранилище браузера')); return; }

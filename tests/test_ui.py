@@ -25,6 +25,17 @@ with sync_playwright() as p:
                 pg.click(f'nav.tabs button[data-tab={t}]'); pg.wait_for_timeout(400); over += [t + ':' + x for x in pg.evaluate(OVER)]
             check(not errs and not over, f'{lang}: all tabs open, no errors {errs[:1]}, no overflow {over[:3]}')
             ctx.close()
+    # first visit: the welcome window offers import, the free sample or a blank font
+    for name, vp, mob in [('desktop', {'width': 1440, 'height': 900}, False), ('phone', {'width': 390, 'height': 844}, True)]:
+        ctx = b.new_context(viewport=vp, has_touch=mob, is_mobile=mob); pg = ctx.new_page(); errs = []
+        pg.on('pageerror', lambda e: errs.append(str(e)[:200])); pg.add_init_script("localStorage.setItem('litera.welcome.test','1')")
+        pg.goto(PAGE); pg.wait_for_timeout(1200)
+        shown = pg.is_visible('#mWelcome'); boot = pg.query_selector('#bootwarn') is None
+        pg.click('#wBlank'); pg.wait_for_timeout(900)
+        st = pg.evaluate("(()=>{const ids=Object.keys(localStorage).filter(k=>k.startsWith('litera.p.'));const f=JSON.parse(localStorage.getItem('litera.p.'+localStorage.getItem('litera.cur')));return [ids.length, Object.values(f.glyphs).filter(g=>g.contours.length).length]})()")
+        pg.reload(); pg.wait_for_load_state('load'); pg.wait_for_timeout(1200); again = not pg.evaluate("document.getElementById('mWelcome').hidden")
+        check(shown and boot and st == [1, 0] and not again and not errs, f'{name}: welcome window on first visit, blank font replaces the sample, shown once ({st}, {errs[:1]})')
+        ctx.close()
     # feature walk-through (desktop)
     ctx = b.new_context(viewport={'width': 1440, 'height': 900}, accept_downloads=True); pg = ctx.new_page(); errs = []
     pg.on('pageerror', lambda e: errs.append(str(e)[:200])); pg.add_init_script("localStorage.setItem('litera.lang','en')")
