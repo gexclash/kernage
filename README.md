@@ -220,6 +220,7 @@ The build writes:
 - `dist/kernage.html`: the app.
 - `dist/kernage_test.html`: the same app wrapped in a full page, used by the tests.
 - `dist/kernage-pwa.zip`: the installable version.
+- `index.html`, `sw.js`, `manifest.webmanifest` and the icons at the repository root: the same installable site, committed so the repository opens as an app and GitHub Pages can serve it straight from the `main` branch. Don't edit them by hand; run the build and commit them together with your changes.
 
 ### Test
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Build Kernage: src/ + assets/ + vendor/ -> dist/kernage.html (single file), dist/kernage_test.html, dist/kernage-pwa.zip.
+"""Build Kernage: src/ + assets/ + vendor/ -> dist/kernage.html (single file), dist/kernage_test.html, dist/kernage-pwa.zip,
+and the installable site (index.html, sw.js, manifest, icons) at the repository root.
 Usage: python3 tools/build.py   (needs Python 3.8+ and Node.js 16+; no network)"""
 import json, os, shutil, subprocess, sys, zipfile
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,6 +37,8 @@ def build():
             '<style>body{margin:0}[hidden]{display:none!important}</style></head><body>')
     open(os.path.join(pw, 'index.html'), 'w', encoding='utf-8').write(head + t + '</body></html>')
     for f in os.listdir(p('assets', 'pwa')): shutil.copy(p('assets', 'pwa', f), os.path.join(pw, f))
+    # the same installable site at the repository root, so GitHub Pages can also serve it straight from the branch
+    for f in os.listdir(pw): shutil.copy(os.path.join(pw, f), p(f))
     with zipfile.ZipFile(p('dist', 'kernage-pwa.zip'), 'w', zipfile.ZIP_DEFLATED) as z:
         for f in sorted(os.listdir(pw)): z.write(os.path.join(pw, f), 'kernage/' + f)
     print('dist/kernage.html', len(t.encode()), 'bytes')
